@@ -1,0 +1,20 @@
+{
+  "dependencies": {},
+  "description": "Control your Panasonic Viera TV over the network",
+  "engines": {
+    "node": ">=8"
+  },
+  "keywords": [
+    "Panasonic",
+    "TV",
+    "remote",
+    "control",
+    "home",
+    "automation"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "panasonic-viera-control",
+  "readme": "ERROR: No README data found!",
+  "version": "0.0.1"
+}
