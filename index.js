@@ -1,6 +1,6 @@
 /*
  *  Node.js module for control of a Panasonic Viera TV
- *  
+ *
  *  Copyright (c) 2013 THLabs.net
  */
 
@@ -9,7 +9,7 @@ var http = require('http');
 //Export the constructor
 exports = module.exports = PanasonicViera;
 
-/* 
+/*
  * Key Constants
  */
 // power
@@ -25,7 +25,14 @@ exports.MUTE_TOGGLE 	= 'MUTE';
 exports.TV				= 'TV';
 exports.INTERNET		= 'INTERNET';
 exports.CHANGE_INPUT	= 'CHG_INPUT';
-exports.SD_CARD			= 'SD_CARD';
+exports.HDMI1			= 'HDMI1';
+exports.HDMI2			= 'HDMI2';
+exports.HDMI3			= 'HDMI3';
+exports.HDMI4			= 'HDMI4';
+exports.VIDEO1			= 'VIDEO1';
+exports.VIDEO2			= 'VIDEO2';
+exports.VIDEO3			= 'VIDEO3';
+exports.VIDEO4			= 'VIDEO4';
 // number keypad
 exports.D1				= 'D1';
 exports.D2				= 'D2';
@@ -96,7 +103,7 @@ var ACTION_SETMUTE		= 'SetMute';
 // args
 var ARG_SENDKEY			= 'X_KeyEvent';
 
-/* 
+/*
  * Variables
  */
 var ipAddress = "0.0.0.0";
@@ -113,7 +120,7 @@ function PanasonicViera(ipAddress){
 
 /**
  * Create and submit XML request to the TV
- * 
+ *
  * @param  {String} url    The API endpoint required for this <action>
  * @param  {String} urn    The URN required for this <action>
  * @param  {String} action The action type to perform
@@ -169,23 +176,24 @@ PanasonicViera.prototype.submitRequest = function(url, urn, action, options){
 
 /**
  * Send a key state event to the TV
- * 
+ *
  * @param  {String} key   The key value to send
  * @param  {String} state <ON|OFF|ONOFF>
  */
 PanasonicViera.prototype.sendKey = function(key, state){
 	this.submitRequest(
-		URL_NETWORK, 
-		URN_NETWORK, 
-		ACTION_SENDKEY, 
+		URL_NETWORK,
+		URN_NETWORK,
+		ACTION_SENDKEY,
 		{
 			args: "<"+ARG_SENDKEY+">NRC_"+key+"-"+state+"</"+ARG_SENDKEY+">"
 		}
 	);
 }
+
 /**
- * Send a key press event to the TV 
- * 
+ * Send a key press event to the TV
+ *
  * @param  {String} key   The key that has been pressed
  */
 PanasonicViera.prototype.keyDown = function(key){
@@ -193,7 +201,7 @@ PanasonicViera.prototype.keyDown = function(key){
 }
 /**
  * Send a key release event to the TV
- * 
+ *
  * @param  {String} key   The key that has been released
  */
 PanasonicViera.prototype.keyUp = function(key){
@@ -201,7 +209,7 @@ PanasonicViera.prototype.keyUp = function(key){
 }
 /**
  * Send a key push/release event to the TV
- * 
+ *
  * @param  {String} key   The key that has been released
  */
 PanasonicViera.prototype.send = function(key){
@@ -210,7 +218,7 @@ PanasonicViera.prototype.send = function(key){
 
 /**
  * Get the current volume value
- * 
+ *
  * @param  {Function} callback A function of the form function(volume) to return the volume value to
  */
 PanasonicViera.prototype.getVolume = function(callback){
@@ -235,7 +243,7 @@ PanasonicViera.prototype.getVolume = function(callback){
 }
 /**
  * Set the volume to specific level
- * 
+ *
  * @param  {int} volume The value to set the volume to
  */
 PanasonicViera.prototype.setVolume = function(volume){
@@ -251,7 +259,7 @@ PanasonicViera.prototype.setVolume = function(volume){
 
 /**
  * Get the current mute setting
- * 
+ *
  * @param  {Function} callback A function of the form function(mute) to return the volume value to
  */
 PanasonicViera.prototype.getMute = function(callback){
@@ -276,7 +284,7 @@ PanasonicViera.prototype.getMute = function(callback){
 }
 /**
  * Set mute to on/off
- * 
+ *
  * @param  {boolean} enable The value to set mute to
  */
 PanasonicViera.prototype.setMute = function(enable){
